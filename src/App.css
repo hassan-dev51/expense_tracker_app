@@ -87,7 +87,7 @@ input[type="number"] {
   display: flex;
   justify-content: center;
 }
-.btn input {
+.btn button {
   border-radius: 10px;
   width: 50%;
   font-size: 1rem;
@@ -97,7 +97,7 @@ input[type="number"] {
   border: none;
   cursor: pointer;
 }
-.btn input:hover {
+.btn button:hover {
   background-color: black;
   color: white;
   transition: ease-in 0.3s linear;

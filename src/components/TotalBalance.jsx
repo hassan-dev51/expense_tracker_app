@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../context/TransactionContext";
 
 const TotalBalance = () => {
+  const { transaction } = useContext(AppContext);
+  const Amount = transaction.map((value) => value.amount);
+
+  const Total = Number(
+    Amount.reduce((acc, item) => (acc += item), 0).toFixed(2)
+  );
   return (
     <div className="total_balance">
       <h2 style={{ margin: 0, padding: "1rem" }}>Your Total Balance</h2>
@@ -11,7 +18,7 @@ const TotalBalance = () => {
           marginLeft: "1rem",
         }}
       >
-        $200
+        ${Total}
       </span>
     </div>
   );

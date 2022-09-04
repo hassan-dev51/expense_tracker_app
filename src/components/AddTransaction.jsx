@@ -1,54 +1,83 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Tooltip } from "@mui/material";
+import { AppContext } from "../context/TransactionContext";
+
 const AddTransaction = () => {
+  const { transaction, AddTransactionFunc } = useContext(AppContext);
+  const [AddDescription, setAddDescription] = useState("");
+
+  const [AddAmount, setAddAmount] = useState(0);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (AddDescription && AddAmount) {
+      AddTransactionFunc({
+        amount: Number(AddAmount),
+        desc: AddDescription,
+      });
+    } else {
+      alert("Please Add Something");
+    }
+    setAddDescription("");
+    setAddAmount("");
+  };
   return (
     <div className="add_transaction">
       <div className="form">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input_fields">
             <input
               type="text"
               name="text"
               placeholder="Add Transaction"
               autoComplete="off"
+              onChange={(e) => setAddDescription(e.target.value)}
             />
             <input
               type="number"
               name="number"
               id="number"
               placeholder="Add Amount"
+              onChange={(e) => setAddAmount(e.target.value)}
             />
           </div>
           <div className="check_fields">
-            <label htmlFor="Expense">
-              Expense
-              <input type="radio" name="radio" id="expense" checked="checked" />
-            </label>
-            <label htmlFor="Expense">
-              Income
-              <input type="radio" name="radio" id="income" />
-            </label>
+            <h3>Use (-) sign for Expense</h3>
           </div>
           <div className="btn">
-            <input type="submit" value="Add Transaction" />
+            <button type="submit">Add Transaction</button>
           </div>
         </form>
       </div>
       <div className="list">
-        <div className="todo_list" style={{ borderLeft: "5px solid red" }}>
-          <li>Bills</li>
-          <span>$34</span>
-          <div className="todo_icon add_todo">
-            <Tooltip
-              title="Delete"
-              placement="top-start"
-              style={{ cursor: "pointer" }}
+        {transaction.map((currElem, ind) => {
+          const sign = currElem.amount < 0 ? "-" : "+";
+          return (
+            <div
+              className="todo_list"
+              style={
+                currElem.amount < 0
+                  ? { borderLeft: "5px solid red" }
+                  : { borderLeft: "5px solid green" }
+              }
+              key={ind}
             >
-              <DeleteIcon />
-            </Tooltip>
-          </div>
-        </div>
+              <li
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "65%",
+                }}
+              >
+                <span>{currElem.desc}</span>
+                <span>
+                  {sign} {Math.abs(currElem.amount)}
+                </span>{" "}
+              </li>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
