@@ -5,9 +5,10 @@ const ExpInc = () => {
   const { transaction } = useContext(AppContext);
   const Amount = transaction.map((value) => value.amount);
 
-  const income = Amount.filter((value) => value > 0)
-    .reduce((acc, item) => (acc += item), 0)
-    .toFixed(2);
+  const income = Amount.filter((value) => value > 0).reduce(
+    (acc, item) => (acc += item),
+    0
+  );
 
   const expense =
     Amount.filter((value) => value < 0).reduce(

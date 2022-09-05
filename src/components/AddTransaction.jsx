@@ -4,7 +4,8 @@ import { Tooltip } from "@mui/material";
 import { AppContext } from "../context/TransactionContext";
 
 const AddTransaction = () => {
-  const { transaction, AddTransactionFunc } = useContext(AppContext);
+  const { transaction, AddTransactionFunc, DeleteTransaction } =
+    useContext(AppContext);
   const [AddDescription, setAddDescription] = useState("");
 
   const [AddAmount, setAddAmount] = useState(0);
@@ -19,8 +20,6 @@ const AddTransaction = () => {
     } else {
       alert("Please Add Something");
     }
-    setAddDescription("");
-    setAddAmount("");
   };
   return (
     <div className="add_transaction">
@@ -75,6 +74,8 @@ const AddTransaction = () => {
                   {sign} {Math.abs(currElem.amount)}
                 </span>{" "}
               </li>
+              {/* this function throw error  */}
+              {/* <DeleteIcon onClick={() => DeleteTransaction(ind)} /> */}
             </div>
           );
         })}

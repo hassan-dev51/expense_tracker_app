@@ -17,10 +17,10 @@ const TransactionContext = ({ children }) => {
       },
     });
   };
-  const DeleteTransaction = (id) => {
+  const DeleteTransaction = (ind) => {
     dispatch({
       type: "Delete_transaction",
-      payload: id,
+      payload: ind,
     });
   };
   return (
