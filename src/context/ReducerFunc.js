@@ -6,7 +6,7 @@ export const reducerFun = (state, action) => {
     case "Delete_transaction": {
       return {
         ...state,
-        transaction: state.amount.filter((val) => {
+        transaction: state.transaction.filter((val) => {
           return val.id !== action.payload;
         }),
       };

@@ -12,6 +12,8 @@ const AddTransaction = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setAddDescription("");
+    setAddAmount("");
     if (AddDescription && AddAmount) {
       AddTransactionFunc({
         amount: Number(AddAmount),
@@ -75,7 +77,9 @@ const AddTransaction = () => {
                 </span>{" "}
               </li>
               {/* this function throw error  */}
-              {/* <DeleteIcon onClick={() => DeleteTransaction(ind)} /> */}
+              {/* <Tooltip title="Delete">
+                <DeleteIcon onClick={() => DeleteTransaction(ind)} />
+              </Tooltip> */}
             </div>
           );
         })}
